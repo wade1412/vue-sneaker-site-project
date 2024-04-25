@@ -4,7 +4,9 @@ defineProps({
   imageUrl: String,
   price: Number,
   isFavorite: Boolean,
-  isAdded: Boolean
+  isAdded: Boolean,
+  onClickAdd: Function,
+  onClickFavorite: Function
 })
 </script>
 
@@ -13,7 +15,8 @@ defineProps({
     class="relative bg-white border border-slate-100 rounded-xl p-8 cursor-pointer hover:-translate-y-2 hover:shadow-xl transition"
   >
     <img
-      src="D:\React Projects\vue-sneaker-site-project\public\img\liked.svg"
+      @click="onClickFavorite"
+      :src="!isFavorite ? '/public/img/heart.svg' : 'public/img/liked.svg'"
       alt="Like 1"
       class="absolute top-8 left-8"
     />
@@ -26,7 +29,11 @@ defineProps({
         <span>${{ price }}</span>
       </div>
 
-      <img src="D:\React Projects\vue-sneaker-site-project\public\img\plus.svg" alt="AddToCart" />
+      <img
+        @click="onClickAdd"
+        :src="!isAdded ? '/public/img/plus.svg' : 'public/img/btn-checked.svg'"
+        alt="AddToCart"
+      />
     </div>
   </div>
 </template>

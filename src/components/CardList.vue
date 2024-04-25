@@ -4,11 +4,12 @@ import ItemCard from './ItemCard.vue'
 
 <template>
   <div class="grid grid-cols-4 gap-5">
-    <ItemCard title="Nike Blazer Mid Suede Men" imageUrl="public\img\sneakers\1.jpg" :price="89" />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
-    <ItemCard />
+    <ItemCard
+      title="Nike Blazer Mid Suede Men"
+      imageUrl="public\img\sneakers\1.jpg"
+      :price="89"
+      :onClickAdd="false"
+      :onClickFavorite="false"
+    />
   </div>
 </template>
