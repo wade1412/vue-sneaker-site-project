@@ -1,13 +1,19 @@
 <script setup>
 import ItemCard from './ItemCard.vue'
+
+defineProps({
+  items: Array
+})
 </script>
 
 <template>
   <div class="grid grid-cols-4 gap-5">
     <ItemCard
-      title="Nike Blazer Mid Suede Men"
-      imageUrl="public\img\sneakers\1.jpg"
-      :price="89"
+      v-for="item in items"
+      :key="item.id"
+      :title="item.title"
+      :imageUrl="item.imageUrl"
+      :price="item.price"
       :onClickAdd="false"
       :onClickFavorite="false"
     />
