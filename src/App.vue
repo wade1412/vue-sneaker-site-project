@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, provide, reactive, ref, watch } from 'vue'
+import { computed, onMounted, provide, reactive, ref, watch } from 'vue'
 import CardList from './components/CardList.vue'
 import TheDrawer from './components/TheDrawer.vue'
 import TheHeader from './components/TheHeader.vue'
@@ -9,6 +9,9 @@ const items = ref([])
 const cart = ref([])
 
 const drawerOpen = ref(false)
+
+const totalPrice = computed(() => cart.value.reduce((acc, item) => acc + item.price, 0))
+const vatPrice = computed(() => Math.round(totalPrice.value * 5) / 100)
 
 const openDrawer = () => {
   drawerOpen.value = true
@@ -131,9 +134,9 @@ provide('cart', {
 </script>
 
 <template>
-  <TheDrawer v-if="drawerOpen" />
+  <TheDrawer v-if="drawerOpen" :total-price="totalPrice" :vat-price="vatPrice" />
   <div class="w-4/5 m-auto bg-white rounded-xl shadow-xl mt-10">
-    <TheHeader @open-drawer="openDrawer" />
+    <TheHeader @open-drawer="openDrawer" :total-price="totalPrice" />
 
     <div class="p-10">
       <div class="flex justify-between items-center">
