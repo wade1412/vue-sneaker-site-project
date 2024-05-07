@@ -2,6 +2,8 @@
 import CartHead from './CartHead.vue'
 import CartItemList from './CartItemList.vue'
 
+const emit = defineEmits(['createOrder'])
+
 defineProps({
   totalPrice: Number,
   vatPrice: Number
@@ -28,8 +30,9 @@ defineProps({
         <b>${{ vatPrice }}</b>
       </div>
       <button
-        disabled=""
-        class="bg-blue-200 w-full rounded-xl py-3 text-xl font-bold text-white hover:bg-blue-300 transition active:bg-lime-500 disabled:bg-slate-300 cursor-pointer"
+        :disabled="totalPrice ? false : true"
+        class="bg-blue-300 w-full rounded-xl py-3 text-xl font-bold text-white hover:bg-blue-400 transition active:bg-blue-500 disabled:bg-slate-300 cursor-pointer"
+        @click="() => emit('createOrder')"
       >
         Confirm order
       </button>

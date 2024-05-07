@@ -36,6 +36,21 @@ const removeFromCart = (item) => {
   item.isAdded = false
 }
 
+const createOrder = async () => {
+  try {
+    const { data } = await axios.post(`https://0e6425652546c825.mokky.dev/orders`, {
+      items: cart.value,
+      totalPrice: totalPrice.value + vatPrice.value
+    })
+
+    cart.value = []
+
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 const onClickAddPlus = (item) => {
   if (!item.isAdded) {
     addToCart(item)
@@ -134,7 +149,12 @@ provide('cart', {
 </script>
 
 <template>
-  <TheDrawer v-if="drawerOpen" :total-price="totalPrice" :vat-price="vatPrice" />
+  <TheDrawer
+    v-if="drawerOpen"
+    :total-price="totalPrice"
+    :vat-price="vatPrice"
+    @create-order="createOrder"
+  />
   <div class="w-4/5 m-auto bg-white rounded-xl shadow-xl mt-10">
     <TheHeader @open-drawer="openDrawer" :total-price="totalPrice" />
 
