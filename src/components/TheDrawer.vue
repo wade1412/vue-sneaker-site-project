@@ -6,7 +6,8 @@ const emit = defineEmits(['createOrder'])
 
 defineProps({
   totalPrice: Number,
-  vatPrice: Number
+  vatPrice: Number,
+  isCartButtonDisabled: Boolean
 })
 </script>
 
@@ -30,7 +31,7 @@ defineProps({
         <b>${{ vatPrice }}</b>
       </div>
       <button
-        :disabled="totalPrice ? false : true"
+        :disabled="isCartButtonDisabled"
         class="bg-blue-300 w-full rounded-xl py-3 text-xl font-bold text-white hover:bg-blue-400 transition active:bg-blue-500 disabled:bg-slate-300 cursor-pointer"
         @click="() => emit('createOrder')"
       >
